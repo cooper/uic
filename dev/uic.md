@@ -32,7 +32,20 @@ Where the capitalized words represent the following:
 * **COMMAND:** the name of the command being received or sent.
 * **PARAMETER:** the value of the command being received or sent.
 
+#### 1.3.1. Parameters and values
+
 The PARAMETER will be suffixed with the VALUE, where the VALUE is in parenthesis (`(` and
 `)`, ASCII 40 and 41). The OTHER and second VALUE represent another parameter and value
 pair. Parameters are to be separated by a comma (`,`, 44). If a VALUE were to contain
 parenthesis, they must be escaped with a backslash (`\`, 92).
+
+#### 1.3.2. Spacing and symbols
+
+The colon (`:`, ASCII 58) after COMMAND is required.  
+
+Spacing has no significant meaning;
+the example is spaced only for clarity and readability. It could have also been written as
+
+```
+[COMMAND:PARAMETER(VALUE),OTHER(VALUE)]
+```
