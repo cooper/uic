@@ -24,7 +24,7 @@ never follow newlines, as that would be considered a blank message.
 Messages are written in the following syntax:
 
 ```
-\[COMMAND: PARAMETER(VALUE), OTHER(VALUE)\]
+[COMMAND: PARAMETER(VALUE), OTHER(VALUE)]
 ```
 
 Where the capitalized words represent the following:
