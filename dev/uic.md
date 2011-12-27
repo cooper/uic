@@ -49,3 +49,35 @@ the example is spaced only for clarity and readability. It could have also been 
 ```
 [COMMAND:PARAMETER(VALUE),OTHER(VALUE)]
 ```
+
+## 2. Commands
+
+This section covers all standardized commands. For syntax of commands see, **1.3**. Any of
+the commands in this section must be implemented properly for complete, true UIC software.
+
+### 2.1. Implementation of commands
+
+This section explains how commands can be implemented in clients and servers without
+breaking compatibility.
+
+#### 2.1.1. Commands can be ignored.
+
+Commands which are not implemented in certain software can be ignored by other software.
+For example, if a server provides a command for convenience, it should not affect the
+compatibility with a standard client. If a client is capable of parsing a command but the
+command is never sent to it from the server, it will not affect compatibility.  
+
+#### 2.1.2. Overriding core commands
+
+However, this means that the behavior of one client may be affected by another client. To
+avoid this, extensible commands must not overcome the job of a command in this
+specification. For example, assuming a 'quit' command is defined in this document, no
+command should replace its functionality, as not all clients will comprehend that the user
+disconnected.
+
+## 3. Server-to-client connection establishment
+
+This section describes the order in which a user must identify himself upon connecting to
+a server. It also explains the responses which will be received from the server.
+
+### 3.1. 
