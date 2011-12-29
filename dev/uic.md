@@ -144,14 +144,14 @@ parameter names.
 One of *user* or *server* must be present. Both can be present, which means the command is
 both a user command and a server command.
 
-## 5. Server-to-client connection establishment
+## 6. Server-to-client connection establishment
 
 This section describes the order in which a user must identify himself upon connecting to
 a server. It also explains the responses which will be received from the server.
 
-### 5.1. Server-to-client introduction
+### 6.1. Server-to-client introduction
 
-### 5.2. Example connection
+### 6.2. Example connection
 
 ```
 -> [hello: myNameIs(uic.notroll.net), description(uicnet server), software(uicd), version(0.1), uicVersion(1)]
