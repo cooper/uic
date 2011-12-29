@@ -24,7 +24,7 @@ never follow newlines, as that would be considered a blank message.
 Messages are written in the following syntax:
 
 ```
-[COMMAND: PARAMETER(VALUE), OTHER(VALUE)]
+[COMMAND: PARAMETER(VALUE) OTHER(VALUE)]
 ```
 
 Where the capitalized words represent the following:
@@ -36,9 +36,8 @@ Where the capitalized words represent the following:
 
 The PARAMETER will be suffixed with the VALUE, where the VALUE is in parenthesis (`(` and
 `)`, ASCII 40 and 41). The OTHER and second VALUE represent another parameter and value
-pair. Parameters are to be separated by a comma (`,`, 44). If a VALUE were to contain
-parenthesis, they must be escaped with a backslash (`\`, 92). If a boolean parameter has
-no value(s), the parenthesis may be omitted.
+pair. If a VALUE were to contain parenthesis, they must be escaped with a backslash
+(`\`, 92). If a boolean parameter has no value(s), the parenthesis may be omitted.
 
 #### 1.3.2. Spacing and symbols
 
@@ -48,7 +47,7 @@ Spacing has no significant meaning;
 the example is spaced only for clarity and readability. It could have also been written as
 
 ```
-[COMMAND:PARAMETER(VALUE),OTHER(VALUE)]
+[COMMAND:PARAMETER(VALUE)OTHER(VALUE)]
 ```
 
 ## 2. Commands
@@ -97,9 +96,10 @@ servers must be able to handle all client commands.*
 registerCommand tells a client which commands are implemented in the server. It must be
 implemented by both servers and clients. The purpose of the command is to reduce pointless
 sending of commands which are not implemented by the corresponding software.
+registerCommand is not used to register the registerCommand command.
 
 ```
-[registerCommand: *name(COMMAND_NAME), parameters(COMMAND_PARAMETERS), user, server]
+[registerCommand: *name(COMMAND_NAME) parameters(COMMAND_PARAMETERS) user server]
 ```
 
 #### Parameters
@@ -127,9 +127,10 @@ servers must be able to handle all client commands.*
 registerCommand tells the server which commands are implemented in the client. It must be
 implemented by both servers and clients. The purpose of the command is to reduce pointless
 sending of commands which are not implemented by the corresponding software.
+registerCommand is not used to register the registerCommand command.
 
 ```
-[registerCommand: *name(COMMAND_NAME), parameters(COMMAND_PARAMETERS), user, server]
+[registerCommand: *name(COMMAND_NAME) parameters(COMMAND_PARAMETERS) user server]
 ```
 
 #### Parameters
@@ -154,9 +155,9 @@ a server. It also explains the responses which will be received from the server.
 ### 6.2. Example connection
 
 ```
--> [hello: myNameIs(uic.notroll.net), description(uicnet server), software(uicd), version(0.1), uicVersion(1)]
-<- [hello: myNameIs(Mitchell Cooper), software(ntuic), version(0.1), uicVersion(1)]
--> [user: id(23), name(Mitchell Cooper), hostname(c-80-246-243-16.hsd1.il.comcast.net), 
--> [welcome: to(uicnet), yourId(23)]
+-> [hello: myNameIs(uic.notroll.net) description(uicnet server) software(uicd) version(0.1) uicVersion(1)]
+<- [hello: myNameIs(Mitchell Cooper) software(ntuic) version(0.1) uicVersion(1)]
+-> [user: id(23) name(Mitchell Cooper) hostname(c-80-246-243-16.hsd1.il.comcast.net)]
+-> [welcome: to(uicnet) yourId(23)]
 
 ```
