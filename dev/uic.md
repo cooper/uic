@@ -82,13 +82,19 @@ specification. For example, assuming a 'quit' command is defined in this documen
 command should replace its functionality, as not all clients will comprehend that the user
 disconnected.
 
-## 2.2. Core command list
+## 3. Servers and users
 
-This section describes the commands which must be implemented in true UIC software.
+## 4. Core server command list
 
-### 2.2.1. registerCommand
+This section describes the commands which must be implemented in true UIC servers.  
 
-registerCommand tells a client or server which commands are implemented. It must be
+*Note: client commands are command which clients send, and server commands are commands
+which servers send. All clients must be able to handle all server commands, and all
+servers must be able to handle all client commands.*
+
+### 4.1. registerCommand
+
+registerCommand tells a client which commands are implemented in the server. It must be
 implemented by both servers and clients. The purpose of the command is to reduce pointless
 sending of commands which are not implemented by the corresponding software.
 
@@ -108,16 +114,44 @@ parameter names.
 One of *user* or *server* must be present. Both can be present, which means the command is
 both a user command and a server command.
 
-## 3. Servers and users
+## 5. Core client command list.
 
-## 4. Server-to-client connection establishment
+This section describes the commands which must be implemented in true UIC clients.  
+
+*Note: client commands are command which clients send, and server commands are commands
+which servers send. All clients must be able to handle all server commands, and all
+servers must be able to handle all client commands.*
+
+### 5.1. registerCommand
+
+registerCommand tells the server which commands are implemented in the client. It must be
+implemented by both servers and clients. The purpose of the command is to reduce pointless
+sending of commands which are not implemented by the corresponding software.
+
+```
+[registerCommand: *name(COMMAND_NAME), parameters(COMMAND_PARAMETERS), user, server]
+```
+
+#### Parameters
+
+* **name:** required, where *COMMAND_NAME* is the name of the command, such as
+sendMessage.
+* **parameters:** optional, where *COMMAND_PARAMETERS* is a space-separated list of
+parameter names.
+* **user:** optional - means the command is executed by users.
+* **server:** optional - means the command is executed by servers.
+
+One of *user* or *server* must be present. Both can be present, which means the command is
+both a user command and a server command.
+
+## 5. Server-to-client connection establishment
 
 This section describes the order in which a user must identify himself upon connecting to
 a server. It also explains the responses which will be received from the server.
 
-### 4.1. Server-to-client introduction
+### 5.1. Server-to-client introduction
 
-### 4.2. Example connection
+### 5.2. Example connection
 
 ```
 -> [hello: myNameIs(uic.notroll.net), description(uicnet server), software(uicd), version(0.1), uicVersion(1)]
