@@ -93,25 +93,36 @@ implemented by both servers and clients. The purpose of the command is to reduce
 sending of commands which are not implemented by the corresponding software.
 
 ```
-[registerCommand: name(COMMAND_NAME), user, server]
+[registerCommand: *name(COMMAND_NAME), parameters(COMMAND_PARAMETERS), user, server]
 ```
 
 #### Parameters
 
-* **name** - required
-* **user** - optional; means the command is executed by users.
-* **server** - optional; means the command is executed by servers.
+* **name:** required, where *COMMAND_NAME* is the name of the command, such as
+sendMessage.
+* **parameters:** optional, where *COMMAND_PARAMETERS* is a space-separated list of
+parameter names.
+* **user:** optional - means the command is executed by users.
+* **server:** optional - means the command is executed by servers.
 
 One of *user* or *server* must be present. Both can be present, which means the command is
 both a user command and a server command.
 
-#### Values
+## 3. Servers and users
 
-* **COMMAND_NAME:** the name of the command, such as sendMessage.
-
-## 3. Server-to-client connection establishment
+## 4. Server-to-client connection establishment
 
 This section describes the order in which a user must identify himself upon connecting to
 a server. It also explains the responses which will be received from the server.
 
-### 3.1. 
+### 4.1. Server-to-client introduction
+
+### 4.2. Example connection
+
+```
+-> [hello: myNameIs(uic.notroll.net), description(uicnet server), software(uicd), version(0.1), uicVersion(1)]
+<- [hello: myNameIs(Mitchell Cooper), software(ntuic), version(0.1), uicVersion(1)]
+-> [user: id(23), name(Mitchell Cooper), hostname(c-80-246-243-16.hsd1.il.comcast.net), 
+-> [welcome: to(uicnet), yourId(23)]
+
+```
