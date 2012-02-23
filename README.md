@@ -5,4 +5,3 @@
 ## authors
 
 * **Mitchell Cooper**: <mitchell@notroll.net>
-* **Foxy:** <foxy@notroll.net>
