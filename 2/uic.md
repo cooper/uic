@@ -9,7 +9,8 @@ structure of such messages and events.
 
 ### 1.1. Message length
 
-Messages have neither a character limit nor a byte limit.
+Messages have neither a character limit nor a byte limit. However, UIC server software may
+implement limits as necessary.
 
 ### 1.2. Separation of messages
 
@@ -24,36 +25,50 @@ never follow newlines, as that would be considered a blank message.
 Messages are written in the following syntax:
 
 ```
-[COMMAND: PARAMETER(VALUE) OTHER(VALUE)]
+ID [ COMMAND: PARAMETER(VALUE) OTHER(VALUE) ]
 ```
 
-Where the capitalized words represent the following:
+Where the capitalized keywords represent the following:
 
+* **ID:** the *optional* message identifier.
 * **COMMAND:** the name of the command being received or sent.
-* **PARAMETER:** the value of the command being received or sent.
+* **PARAMETER:** the *optional* name of a message parameter.
+* **OTHER:** another *optional* name of a message parameter.
+* **VALUE:** a value of an optional message parameter.
+
+Messages can have any number of parameters, including zero: `2[someCommand]`  
+Messages do not have to have a message identifier: `[someCommand]`
 
 #### 1.3.1. Parameters and values
 
 The PARAMETER will be suffixed with the VALUE, where the VALUE is in parenthesis (`(` and
 `)`, ASCII 40 and 41). The OTHER and second VALUE represent another parameter and value
-pair. If a VALUE were to contain parenthesis, they must be escaped with a backslash
-(`\`, 92). If a boolean parameter has no value(s), the parenthesis may be omitted.
+pair. If a VALUE were to contain a parenthesis, it must be escaped with a backslash
+(`\`, 92).  
+  
+If a boolean parameter has no value(s), the parenthesis may be omitted, and a single
+exclamation point (`!`, 33) may take their place. This is equivalent to using the
+parentheses form with a true value of `1`.
 
 #### 1.3.2. Spacing and symbols
 
-The colon (`:`, ASCII 58) after COMMAND is required.  
-
-Spacing has no significant meaning;
+The left and right brackets (`[` and `]`, ASCII 91 and 93) are ALWAYS required.  
+The colon (`:`, 58) after COMMAND is required unless there are no parameters.  
+Any parameter ALWAYS must use either the boolean exclamation point (`!`, 33) form or the
+non-boolean bracket (`[` and `]`, 91 and 93) form to terminate the parameter name.
+  
+Other than within parentheses, spacing has no significant meaning;
 the example is spaced only for clarity and readability. It could have also been written as
 
 ```
-[COMMAND:PARAMETER(VALUE)OTHER(VALUE)]
+ID[COMMAND:PARAMETER(VALUE)OTHER(VALUE)]
 ```
 
 ## 2. Commands
 
 This section covers all standardized commands. For syntax of commands see, **1.3**. Any of
-the commands in this section must be implemented properly for complete, true UIC software.
+the commands in this section must be implemented properly for complete, recognized UIC
+software.
 
 ### 2.1. Implementation of commands
 
